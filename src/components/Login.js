@@ -11,7 +11,6 @@ const Login = (props) => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQwMzgyMjYzNWFhMjM4OTI2NGRhZDM5In0sImlhdCI6MTY3Nzk1MzIyOH0.sNMaRcCrXZ4wuVn4VQWGD1_Sz1OPFQpVHSng49J6wBU"
             },
             body: JSON.stringify({ email: credentials.email, password: credentials.password })
         });
@@ -20,8 +19,8 @@ const Login = (props) => {
         if (json.success) {
             //Save the authtoken And redirect
             localStorage.setItem('token', json.authtoken);
+            props.showAlert("Logged in Successfully", "success")
             navigate("/");
-            props.showAlert("Logged in Successfully", "success");
         }
         else {
             props.showAlert("Invalid Details", "danger");
@@ -33,7 +32,8 @@ const Login = (props) => {
     }
 
     return (
-        <div>
+        <div className='mt-3'>
+            <h2>Login to continue to Notebook</h2>
             <form onSubmit={handleSubmit}>
                 <div className="mb-3">
                     <label htmlFor="email" className="form-label">Email address</label>
